@@ -59,6 +59,12 @@ You can specify a payload type and it will show you the payload command that is 
 
 `backconnect.py --view python_1`
 
+When passing this parameter and also passing the --ip and --port parameters, the payload output will fill the LHOST/LPORT placeholders. This allows you to easily generate payloads that can be used in other scenarios.
+
+`backconnect.py --view {payload_type} -i {listener_ip} -p {listener_port}`
+
+`backconnect.py --view python_1 -i 127.0.0.1 -p 4444`
+
 ##### --payloads
 By default, backconnect.py tests all available payload types. If you know which payload type works for your current target you can specify these individually or in a comma-separated list.
 
