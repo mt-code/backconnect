@@ -20,6 +20,3 @@ help {command}"""
 
         if command in framework.available_commands:
             framework.available_commands[command].print_description()
-
-    def print_description(self):
-        print(self.description)
