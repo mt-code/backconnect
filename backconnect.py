@@ -3,6 +3,7 @@ import sys
 import argparse
 import requests
 import urllib.parse
+import lib.framework.framework as framework
 from threading import Lock
 from multiprocessing.pool import ThreadPool
 
@@ -161,5 +162,8 @@ class BackConnect:
 
 
 if __name__ == '__main__':
-    backconnect = BackConnect()
-    backconnect.run()
+    if len(sys.argv) > 1:
+        backconnect = BackConnect()
+        backconnect.run()
+    else:
+        framework.start()
