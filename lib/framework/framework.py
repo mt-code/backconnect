@@ -1,11 +1,12 @@
 from terminaltables import AsciiTable
-from lib.framework.commands import Help, Set, Show, Unset
+from lib.framework.commands import Help, Quit, Set, Show, Unset
 from lib.framework.modules import Parameters
 from lib.framework.utility import CommandParser
 
 parameters = Parameters()
 available_commands = {
     "help": Help(),
+    "quit": Quit(),
     "set": Set(),
     "show": Show(),
     "unset": Unset(),

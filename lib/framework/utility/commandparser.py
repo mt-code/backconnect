@@ -7,9 +7,7 @@ from lib.framework.exceptions import FrameworkException
 class CommandParser:
 
     def run(self):
-        user_input = ""
-
-        while user_input != "quit" and user_input != "q":
+        while True:
             try:
                 user_input = input("\n[>] ")
                 self.parse(user_input.split())
