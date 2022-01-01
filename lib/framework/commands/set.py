@@ -16,8 +16,8 @@ Sets a framework parameter.
 """
 
     def execute(self, args):
-        framework.parameters.set(args[0], args[1])
-        logger.success(f"{args[0]} => {args[1]}")
+        framework.parameters.set(args[0].lower(), args[1])
+        logger.success(f"{args[0].lower()} => {args[1]}")
 
     def print_description(self):
         print(self.description)
