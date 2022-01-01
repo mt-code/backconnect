@@ -16,8 +16,10 @@ Show information relating to the specified module.
 """
 
     def __init__(self):
+        # TODO: Instantiate the modules in the framework.py file
         self.modules = {
-            "params": framework.parameters
+            "params": framework.parameters,
+            "payloads": framework.payloads,
         }
 
     def execute(self, args):

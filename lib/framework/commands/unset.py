@@ -10,8 +10,7 @@ class Unset(Command):
     description = """
 Unsets a framework parameter.
 
-"unset {param}"
-"""
+"unset {param}" """
 
     def execute(self, args):
         framework.parameters.unset(args[0])
