@@ -48,7 +48,12 @@ class Command(metaclass=ABCMeta):
 
     # Validates and executes the command.
     def run(self, args):
-        if not self.validate(args):
+        value = self.validate(args)
+
+        if not value:
             raise CommandValidationException(f"Expected format: {self.example_format()}")
+
+        if type(value) is str:
+            raise CommandValidationException(value)
 
         self.execute(args)

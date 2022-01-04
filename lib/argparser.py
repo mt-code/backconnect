@@ -1,0 +1,2 @@
+class ArgParser:
+    pass

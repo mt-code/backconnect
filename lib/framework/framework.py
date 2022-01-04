@@ -1,5 +1,5 @@
 from terminaltables import AsciiTable
-from lib.framework.commands import Help, Quit, Set, Show, Unset, View
+from lib.framework.commands import Connect, Help, Quit, Set, Show, Unset, View
 from lib.framework.modules import Parameters, Payloads
 from lib.framework.utility import CommandParser
 
@@ -9,6 +9,7 @@ payloads = Payloads()
 
 # TODO: Move commands into its own module
 available_commands = {
+    "connect": Connect(),
     "help": Help(),
     "quit": Quit(),
     "set": Set(),

@@ -15,18 +15,22 @@ Sets a framework parameter.
 "set {param} {value}"
 """
 
+    def validate(self, args):
+        return len(args) >= 2
+
     def execute(self, args):
-        framework.parameters.set(args[0].lower(), args[1])
-        logger.success(f"{args[0].lower()} => {args[1]}")
+        key = args.pop(0).lower()
+        framework.parameters.set(key, args)
+        logger.success(f"{key} => {', '.join(args)}")
 
     def print_description(self):
         print(self.description)
 
         data = [
             ['Parameter', 'Description'],
-            ['lhost', 'The listen host'],
-            ['lport', 'The listen port'],
-            ['url', 'The target URL, this can include the INJECT placeholder']
         ]
+
+        for param in framework.parameters.available.values():
+            data.append([param.name, param.description])
 
         print(AsciiTable(data).table)

@@ -1,6 +1,8 @@
 import lib.framework.utility.logger as logger
 from terminaltables import AsciiTable
 from lib.framework.core import Module
+from lib.framework.exceptions import InvalidParameterException
+from lib.framework.parameters import LHost, LPort, Payloads, Url
 
 
 class Parameters(Module):
@@ -9,8 +11,35 @@ class Parameters(Module):
 
     def __init__(self):
         self.params = {}
+        self.available = {
+            "lhost": LHost(),
+            "lport": LPort(),
+            "payloads": Payloads(),
+            "url": Url(),
+        }
 
     def set(self, key, value):
+        if key not in self.available:
+            raise InvalidParameterException(f"Parameter \"{key}\" is not a valid parameter.")
+
+        # value is passed as a list, convert to single if it is the only item
+        if len(value) == 1:
+            value = value[0]
+
+            # Convert to int if needed
+            if value.isdigit():
+                value = int(value)
+
+        parameter = self.available[key]
+        print(type(value))
+        if type(value) not in parameter.types:
+            types = []
+
+            for param_type in parameter.types:
+                types.append(param_type.__name__)
+
+            raise InvalidParameterException(f"The \"{key}\" parameter value must be of type: {', '.join(types)}")
+
         self.params[key] = value
 
     def unset(self, key):
@@ -29,6 +58,6 @@ class Parameters(Module):
             ]
 
             for key, value in self.params.items():
-                data.append([key, value])
+                data.append([key, ", ".join(value)])
 
             print(AsciiTable(data).table)

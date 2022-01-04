@@ -1,3 +1,4 @@
+from .connect import Connect
 from .help import Help
 from .quit import Quit
 from .set import Set
