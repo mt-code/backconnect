@@ -18,6 +18,16 @@ class Parameters(Module):
             "url": Url(),
         }
 
+    @staticmethod
+    def validate_parameter(parameter, value):
+        valid = parameter.validate(value)
+
+        if not valid:
+            raise InvalidParameterException(f"The value \"{value}\" is not valid for parameter \"{parameter.name}\"")
+
+        if type(valid) is str:
+            raise InvalidParameterException(valid)
+
     def set(self, key, value):
         if key not in self.available:
             raise InvalidParameterException(f"Parameter \"{key}\" is not a valid parameter.")
@@ -32,6 +42,10 @@ class Parameters(Module):
 
         parameter = self.available[key]
 
+        # Validate the parameter value
+        self.validate_parameter(parameter, value)
+
+        # Check that the supplied value is of the correct parameter type
         if type(value) not in parameter.types:
             types = []
 
