@@ -31,7 +31,7 @@ class Parameters(Module):
                 value = int(value)
 
         parameter = self.available[key]
-        print(type(value))
+
         if type(value) not in parameter.types:
             types = []
 
