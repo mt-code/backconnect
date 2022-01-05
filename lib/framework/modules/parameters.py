@@ -58,6 +58,9 @@ class Parameters(Module):
             ]
 
             for key, value in self.params.items():
-                data.append([key, ", ".join(value)])
+                if type(value) is list:
+                    value = ", ".join(value)
+
+                data.append([key, value])
 
             print(AsciiTable(data).table)
