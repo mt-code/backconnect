@@ -28,6 +28,6 @@ class Payload(metaclass=ABCMeta):
             payload = payload.replace("{LHOST}", framework.parameters.params["lhost"])
 
         if "lport" in framework.parameters.params:
-            payload = payload.replace("{LPORT}", framework.parameters.params["lport"])
+            payload = payload.replace("{LPORT}", str(framework.parameters.params["lport"]))
 
         return payload

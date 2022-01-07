@@ -1,4 +1,5 @@
 import lib.framework.framework as framework
+from lib.backconnect import BackConnect
 from lib.framework.core import Command
 
 
@@ -33,5 +34,9 @@ For a list of parameters, type "help set". """
         return True
 
     def execute(self, args):
-        print("connect execute")
+        params = framework.parameters.params
+        backconnect = BackConnect(params["url"], params["lhost"], params["lport"])
+        backconnect.set_payloads(params["payloads"] if "payloads" in params else [])
+        backconnect.connect()
+
 
