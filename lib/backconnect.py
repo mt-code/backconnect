@@ -3,7 +3,7 @@ import lib.framework.utility.logger as logger
 from threading import Lock
 from multiprocessing.pool import ThreadPool
 from lib.framework.core import PayloadRequest
-from requests.exceptions import InvalidURL, ConnectionError
+from requests.exceptions import InvalidURL, ConnectionError, ReadTimeout
 
 
 class BackConnect:
@@ -14,6 +14,7 @@ class BackConnect:
         self.listen_host = listen_hort
         self.listen_port = listen_port
         self.payloads = []
+        self.postdata = None
 
     @staticmethod
     def send_payload(payload_request):
@@ -25,7 +26,7 @@ class BackConnect:
         try:
             payload_request.make()
             logger.custom(name, "Back connect was not successful.")
-        except TimeoutError:
+        except (ReadTimeout, TimeoutError):
             logger.custom(name, "Timeout, this should be success?")
         except InvalidURL:
             logger.custom(name, "The URL you have provided appears to be invalid.")
@@ -39,14 +40,21 @@ class BackConnect:
             self.payloads.append(framework.payloads.available_payloads[payloads])
         else:
             for payload in payloads:
-                print(payload)
                 self.payloads.append(framework.payloads.available_payloads[payload])
+
+    def set_postdata(self, postdata):
+        self.postdata = postdata
 
     def connect(self):
         payload_requests = []
 
         for payload in self.payloads:
-            payload_requests.append(PayloadRequest(self.url, payload))
+            request = PayloadRequest(self.url, payload)
+
+            if self.postdata:
+                request.set_postdata(self.postdata)
+
+            payload_requests.append(request)
 
         thread_pool = ThreadPool(10)
         thread_pool.map(self.send_payload, payload_requests)

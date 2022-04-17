@@ -37,6 +37,10 @@ For a list of parameters, type "help set". """
         params = framework.parameters.params
         backconnect = BackConnect(params["url"], params["lhost"], params["lport"])
         backconnect.set_payloads(params["payloads"] if "payloads" in params else [])
+
+        if "postdata" in params:
+            backconnect.set_postdata(params["postdata"])
+
         backconnect.connect()
 
 
