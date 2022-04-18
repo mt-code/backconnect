@@ -22,6 +22,10 @@ class Parameter(metaclass=ABCMeta):
     def required(self):
         return False
 
+    @property
+    def injectable(self):
+        return False
+
     # This can be overridden if the parameter value needs validating.
     def validate(self, value):
         return True

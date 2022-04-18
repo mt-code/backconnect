@@ -13,6 +13,9 @@ class Set(Command):
 Sets a framework parameter.
 
 "set {param} {value}"
+
+[*] If a parameter is marked as required, that parameter must be set.
+[*] If a parameter is marked as injectable, that parameter can contain the 'INJECT' placeholder.
 """
 
     def validate(self, args):
@@ -27,10 +30,15 @@ Sets a framework parameter.
         print(self.description)
 
         data = [
-            ['Parameter', 'Description', 'Required?'],
+            ['Parameter', 'Description', 'Required?', 'Injectable?'],
         ]
 
         for param in framework.parameters.available.values():
-            data.append([param.name, param.description, 'YES' if param.required else '-'])
+            data.append([
+                param.name,
+                param.description,
+                'YES' if param.required else '-',
+                'YES' if param.injectable else '-',
+            ])
 
         print(AsciiTable(data).table)
