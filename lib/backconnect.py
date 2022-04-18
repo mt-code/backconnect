@@ -39,6 +39,9 @@ class BackConnect:
         if type(payloads) is str:
             self.payloads.append(framework.payloads.available_payloads[payloads])
         else:
+            if len(payloads) <= 0:
+                payloads = framework.payloads.available_payloads
+
             for payload in payloads:
                 self.payloads.append(framework.payloads.available_payloads[payload])
 
