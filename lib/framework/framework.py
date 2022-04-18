@@ -25,13 +25,15 @@ def start():
     parser.run()
 
 
-def output_header():
+def output_header(is_interactive=True):
     print(""" __                __                                       __   
 |  |--.---.-.----.|  |--.----.-----.-----.-----.-----.----.|  |_ 
 |  _  |  _  |  __||    <|  __|  _  |     |     |  -__|  __||   _|
 |_____|___._|____||__|__|____|_____|__|__|__|__|_____|____||____|
+""")
 
-Welcome to the backconnect framework, type 'help' to see all commands.""")
+    if is_interactive:
+        print("Welcome to the backconnect framework, type 'help' to see all commands.")
 
 
 def print_available_commands():
