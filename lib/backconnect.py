@@ -20,20 +20,24 @@ class BackConnect:
     def send_payload(payload_request):
         name = payload_request.payload.name
 
-        with BackConnect.thread_lock:
-            logger.custom(name, f"Sending payload...")
+        BackConnect.output_threadsafe_message(name, f"Sending payload...")
 
         try:
             payload_request.make()
-            logger.custom(name, "Back connect was not successful.")
+            BackConnect.output_threadsafe_message(name, "Back connect was not successful.")
         except (ReadTimeout, TimeoutError):
-            logger.custom(name, "Timeout, this should be success?")
+            BackConnect.output_threadsafe_message(name, "Timeout, this should be success?")
         except InvalidURL:
-            logger.custom(name, "The URL you have provided appears to be invalid.")
+            BackConnect.output_threadsafe_message(name, "The URL you have provided appears to be invalid.")
         except ConnectionError:
-            logger.custom(name, "We failed to connect to the url, is the target online?")
+            BackConnect.output_threadsafe_message(name, "We failed to connect to the url, is the target online?")
         except Exception as e:
-            logger.custom(name, f"An unexpected error occurred: {type(e).__name__}")
+            BackConnect.output_threadsafe_message(name, f"An unexpected error occurred: {type(e).__name__}")
+
+    @staticmethod
+    def output_threadsafe_message(name, message):
+        with BackConnect.thread_lock:
+            logger.custom(name, message)
 
     def set_payloads(self, payloads):
         if type(payloads) is str:
