@@ -21,12 +21,12 @@ class ArgParser:
                                       'arguments.',
                                  action='store_true',)
         self.parser.add_argument('--list', help='Lists all of the available payloads', action='store_true')
-        self.parser.add_argument('--view',
-                                 help='View a specific payload, when --ip and --port are provided the payload is '
-                                      'populated with these values')
         self.parser.add_argument('--payloads',
                                  help='Comma separated list of payloads to use, if no payloads are specified '
                                       'all of the available payloads are attempted.')
+        self.parser.add_argument('--view',
+                                 help='View a specific payload, when --ip and --port are provided the payload is '
+                                      'populated with these values')
 
         try:
             self.args = self.parser.parse_args()
