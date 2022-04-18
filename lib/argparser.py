@@ -37,8 +37,11 @@ class ArgParser:
         try:
             self.args = self.parser.parse_args()
 
+            if self.args.interactive:
+                framework.is_interactive = True
+
             if self.args.help:
-                framework.output_header(self.args.interactive)
+                framework.output_header()
                 self.parser.print_help()
                 return
 

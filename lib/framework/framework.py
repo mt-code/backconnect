@@ -6,6 +6,7 @@ from lib.framework.utility import CommandParser
 # TODO: Dynamically load module parts directly from files, this will allow customisation of the framework
 parameters = Parameters()
 payloads = Payloads()
+is_interactive = False
 
 # TODO: Move commands into its own module
 available_commands = {
@@ -25,7 +26,7 @@ def start():
     parser.run()
 
 
-def output_header(is_interactive=True):
+def output_header():
     print(""" __                __                                       __   
 |  |--.---.-.----.|  |--.----.-----.-----.-----.-----.----.|  |_ 
 |  _  |  _  |  __||    <|  __|  _  |     |     |  -__|  __||   _|

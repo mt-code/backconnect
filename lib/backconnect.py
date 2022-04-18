@@ -63,6 +63,10 @@ class BackConnect:
 
         if not self.check_for_inject_placeholder():
             logger.error("We cannot inject commands as the 'INJECT' placeholder has not been set.")
+
+            if framework.is_interactive:
+                logger.error("Type 'help set' to see a list of injectable parameters.")
+
             return
 
         for payload in self.payloads:
