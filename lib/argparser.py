@@ -24,6 +24,7 @@ class ArgParser:
         self.parser.add_argument('--payloads',
                                  help='Comma separated list of payloads to use, if no payloads are specified '
                                       'all of the available payloads are attempted.')
+        self.parser.add_argument('--postdata', help='POST data query string (e.g. user=admin&pass=admin)')
         self.parser.add_argument('--view',
                                  help='View a specific payload, when --ip and --port are provided the payload is '
                                       'populated with these values')
@@ -72,4 +73,7 @@ class ArgParser:
 
         if self.args.payloads:
             framework.parameters.set('payloads', self.args.payloads.split(','))
+
+        if self.args.postdata:
+            framework.parameters.set('postdata', self.args.postdata)
 
