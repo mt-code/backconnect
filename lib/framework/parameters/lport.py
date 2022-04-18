@@ -5,3 +5,4 @@ class LPort(Parameter):
     name = "lport"
     description = "The listen port"
     types = [int]
+    required = True

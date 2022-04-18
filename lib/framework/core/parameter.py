@@ -18,6 +18,10 @@ class Parameter(metaclass=ABCMeta):
     def types(self):
         pass
 
+    @property
+    def required(self):
+        return False
+
     # This can be overridden if the parameter value needs validating.
     def validate(self, value):
         return True

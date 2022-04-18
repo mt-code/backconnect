@@ -5,3 +5,4 @@ class LHost(Parameter):
     name = "lhost"
     description = "The listen address"
     types = [str]
+    required = True

@@ -27,10 +27,10 @@ Sets a framework parameter.
         print(self.description)
 
         data = [
-            ['Parameter', 'Description'],
+            ['Parameter', 'Description', 'Required?'],
         ]
 
         for param in framework.parameters.available.values():
-            data.append([param.name, param.description])
+            data.append([param.name, param.description, 'YES' if param.required else '-'])
 
         print(AsciiTable(data).table)

@@ -5,3 +5,4 @@ class Url(Parameter):
     name = "url"
     description = "The target URL, this can include the INJECT placeholder"
     types = [str]
+    required = True
