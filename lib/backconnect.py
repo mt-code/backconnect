@@ -48,8 +48,22 @@ class BackConnect:
     def set_postdata(self, postdata):
         self.postdata = postdata
 
+    # Check that there is a place for us to inject commands
+    def check_for_inject_placeholder(self):
+        if self.url and 'INJECT' in self.url:
+            return True
+
+        if self.postdata and 'INJECT' in self.postdata:
+            return True
+
+        return False
+
     def connect(self):
         payload_requests = []
+
+        if not self.check_for_inject_placeholder():
+            logger.error("We cannot inject commands as the 'INJECT' placeholder has not been set.")
+            return
 
         for payload in self.payloads:
             request = PayloadRequest(self.url, payload)
