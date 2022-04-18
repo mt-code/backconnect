@@ -1,7 +1,7 @@
 from terminaltables import AsciiTable
 
 from lib.framework.core import Module
-from lib.framework.payloads import bash_tcp_1
+from lib.framework.payloads import bash_tcp_1, bash_tcp_2, bash_tcp_3
 
 
 class Payloads(Module):
@@ -10,7 +10,9 @@ class Payloads(Module):
 
     def __init__(self):
         self.available_payloads = {
-            "bash_tcp_1": bash_tcp_1()
+            "bash_tcp_1": bash_tcp_1(),
+            "bash_tcp_2": bash_tcp_2(),
+            "bash_tcp_3": bash_tcp_3(),
         }
 
     def show(self):
