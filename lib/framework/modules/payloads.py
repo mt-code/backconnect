@@ -16,6 +16,10 @@ class Payloads(Module):
             "bash_udp_1": bash_udp_1(),
             "bash_udp_2": bash_udp_2(),
             "bash_udp_3": bash_udp_3(),
+            "python_1": python_1(),
+            "python_2": python_2(),
+            "python_3": python_3(),
+            "python_4": python_4(),
         }
 
     def show(self):

@@ -4,3 +4,7 @@ from .bash_tcp_3 import bash_tcp_3
 from .bash_udp_1 import bash_udp_1
 from .bash_udp_2 import bash_udp_2
 from .bash_udp_3 import bash_udp_3
+from .python_1 import python_1
+from .python_2 import python_2
+from .python_3 import python_3
+from .python_4 import python_4
