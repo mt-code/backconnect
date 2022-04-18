@@ -30,6 +30,8 @@ class Parameters(Module):
             raise InvalidParameterException(valid)
 
     def set(self, key, value):
+        key = key.lower()
+
         if key not in self.available:
             raise InvalidParameterException(f"Parameter \"{key}\" is not a valid parameter.")
 

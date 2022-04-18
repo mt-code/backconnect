@@ -1,6 +1,5 @@
-import sys
-import lib.framework.framework as framework
+from lib.argparser import ArgParser
 
 if __name__ == '__main__':
-    if len(sys.argv) <= 1:
-        framework.start()
+    parser = ArgParser()
+    parser.parse_params()

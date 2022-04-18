@@ -19,7 +19,7 @@ Sets a framework parameter.
         return len(args) >= 2
 
     def execute(self, args):
-        key = args.pop(0).lower()
+        key = args.pop(0)
         framework.parameters.set(key, args)
         logger.success(f"{key} => {', '.join(args)}")
 
