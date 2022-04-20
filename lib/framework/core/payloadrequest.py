@@ -15,18 +15,7 @@ class PayloadRequest:
 
     # Converts the post data query string into a dictionary and injects any payloads
     def set_postdata(self, postdata):
-        self.postdata = {}
-        postdata = parse.parse_qs(postdata)
-
-        for key, values in postdata.items():
-            postdata_values = []
-
-            # values is a list type even if there is only 1 item as multiple keys
-            # could be provided in the query string
-            for value in values:
-                postdata_values.append(self.inject_payload(value))
-
-            self.postdata[key] = postdata_values
+        self.postdata = self.inject_payload(postdata)
 
     def set_headers(self, headers):
         for header in headers:
@@ -38,6 +27,10 @@ class PayloadRequest:
         url = requote_uri(self.inject_payload(self.url))
 
         if self.postdata:
+            # Set the correct Content-Type headers when sending postdata if one hasn't already been set.
+            if "Content-Type" not in self.headers:
+                self.headers["Content-Type"] = "application/x-www-form-urlencoded"
+
             requests.post(url, timeout=5, data=self.postdata, headers=self.headers)
         else:
             requests.get(url, timeout=5, headers=self.headers)
