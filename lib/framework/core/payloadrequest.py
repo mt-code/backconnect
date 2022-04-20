@@ -21,7 +21,7 @@ class PayloadRequest:
         for header in headers:
             header = header.split(":", 1)
             key, value = header[0], header[1]
-            self.headers[key.strip(" ")] = value.strip(" ")
+            self.headers[key.strip(" ")] = self.inject_payload(value.strip(" "))
 
     def make(self):
         url = requote_uri(self.inject_payload(self.url))
