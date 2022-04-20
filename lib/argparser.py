@@ -89,4 +89,4 @@ class ArgParser:
             framework.parameters.set('payloads', self.args.payloads.split(','))
 
         if self.args.data:
-            framework.parameters.set('postdata', self.args.postdata)
+            framework.parameters.set('postdata', self.args.data)
