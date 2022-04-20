@@ -15,6 +15,7 @@ class BackConnect:
         self.listen_port = listen_port
         self.payloads = []
         self.postdata = None
+        self.headers = None
 
     @staticmethod
     def send_payload(payload_request):
@@ -52,6 +53,9 @@ class BackConnect:
     def set_postdata(self, postdata):
         self.postdata = postdata
 
+    def set_headers(self, headers):
+        self.headers = headers
+
     # Check that there is a place for us to inject commands
     def check_for_inject_placeholder(self):
         if self.url and 'INJECT' in self.url:
@@ -78,6 +82,9 @@ class BackConnect:
 
             if self.postdata:
                 request.set_postdata(self.postdata)
+
+            if self.headers:
+                request.set_headers(self.headers)
 
             payload_requests.append(request)
 

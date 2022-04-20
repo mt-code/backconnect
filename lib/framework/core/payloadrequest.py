@@ -8,6 +8,7 @@ class PayloadRequest:
         self.url = url
         self.payload = payload
         self.postdata = None
+        self.headers = {}
 
     def inject_payload(self, string):
         return string.replace("INJECT", self.payload.get_payload())
@@ -27,10 +28,16 @@ class PayloadRequest:
 
             self.postdata[key] = postdata_values
 
+    def set_headers(self, headers):
+        for header in headers:
+            header = header.split(":", 1)
+            key, value = header[0], header[1]
+            self.headers[key.strip(" ")] = value.strip(" ")
+
     def make(self):
         url = requote_uri(self.inject_payload(self.url))
 
         if self.postdata:
-            requests.post(url, timeout=5, data=self.postdata)
+            requests.post(url, timeout=5, data=self.postdata, headers=self.headers)
         else:
-            requests.get(url, timeout=5)
+            requests.get(url, timeout=5, headers=self.headers)

@@ -41,6 +41,9 @@ For a list of parameters, type "help set". """
         if "postdata" in params:
             backconnect.set_postdata(params["postdata"])
 
+        if "headers" in params:
+            backconnect.set_headers(params["headers"] if type(params["headers"]) is list else [params["headers"]])
+
         backconnect.connect()
 
 

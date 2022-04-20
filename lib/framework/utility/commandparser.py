@@ -19,7 +19,6 @@ class CommandParser:
             try:
                 user_input = input("\n[>] ")
                 commands = self.parse(user_input)
-                print(commands)
                 self.process(commands)
             except KeyboardInterrupt:
                 sys.exit(0)

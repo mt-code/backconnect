@@ -2,7 +2,7 @@ import lib.framework.utility.logger as logger
 from terminaltables import AsciiTable
 from lib.framework.core import Module
 from lib.framework.exceptions import InvalidParameterException
-from lib.framework.parameters import LHost, LPort, Payloads, PostData, Url
+from lib.framework.parameters import Headers, LHost, LPort, Payloads, PostData, Url
 
 
 class Parameters(Module):
@@ -12,6 +12,7 @@ class Parameters(Module):
     def __init__(self):
         self.params = {}
         self.available = {
+            "headers": Headers(),
             "lhost": LHost(),
             "lport": LPort(),
             "payloads": Payloads(),
